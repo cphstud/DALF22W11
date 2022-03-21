@@ -11,5 +11,5 @@ cat listofmalematches | while read x;
 do
   cp events/$x.json maletmp;
 done
-for i in maletmp/*json; do sed -i '' -e 's/^  \"id/  \"_id/g' $i;done
+for i in maletmp/*json; do sed -i -e 's/^  \"id/  \"_id/g' $i;done
 for i in maletmp/*json; do mongoimport -d=statsbomb -c=events --jsonArray $i;done

@@ -10,11 +10,12 @@ con <-mongo(
   verbose = TRUE
 )
 
-
 artworksAll <- con$find(
-  query = '{"acquisition_date":{"$gte":"1895-01-01T00:00:00Z"}}',
+  query = '{"acquisition_date":{"$gte":"1895-01-01T00:00:00Z"},
+  "object_number":{ "$regex" : "KMS*.", "$options" : "i"}}',
   fields = '{
   "_id":1,
+  "object_number":1,
   "title": {"$first":"$titles.title"},
   "acquisition_date":1,
   "creator": {"$first":"$production.creator"},
